@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if current_user.is_authenticated %}
+    <h3>Greetings {{ current_user.username }}</h3>
+    <p>Here is your API Key: {{ current_user.api_key }}</p>
+{% endif %}
+
+{% endblock %}

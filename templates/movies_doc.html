@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Query Movie</h1>
+<p>Python Example of Querying a Movie:</p>
+<pre id="codey"><code>import requests
+
+api_key = "XXXXXXXXXXXXXXXXXXXXXXXXXX"
+
+url = 'http://127.0.0.1:5000/authenticate'
+my_obj = {'api_key': f'{api_key}'}
+
+request = requests.post(url, json=my_obj)
+
+# Below is used to create the header for future requests
+access_token = request.json()
+access_token = access_token['access_token']
+headers = {
+    "Authorization": f"Bearer {access_token}"
+}
+
+# returns movie
+movie = requests.get("http://127.0.0.1:5000/movies/fight%20club", headers=headers)
+print(movie.json())
+</code></pre>
+
+<p>Additional Information</p>
+<ul>
+    <li>Spaces must be included in the request, or utilize %20 to signify space</li>
+    <li>Sometimes case-sensitive</li>
+</ul>
+
+{% endblock %}

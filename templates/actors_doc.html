@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Query Actor</h1>
+<p>Python Example Query an Actor to Return Movie List:</p>
+<pre id="codey"><code>import requests
+
+api_key = "XXXXXXXXXXXXXXXXXXXXXXXXXX"
+
+url = 'http://127.0.0.1:5000/authenticate'
+my_obj = {'api_key': f'{api_key}'}
+
+request = requests.post(url, json=my_obj)
+
+# Below is used to create the header for future requests
+access_token = request.json()
+access_token = access_token['access_token']
+headers = {
+    "Authorization": f"Bearer {access_token}"
+}
+
+# returns list of movies
+movie = requests.get("http://127.0.0.1:5000/actors/Brad%20Pitt", headers=headers)
+print(movie.json())
+</code></pre>
+
+<p>Additional Information</p>
+<ul>
+    <li>Spaces must be included in the request, or utilize %20 to signify space.</li>
+    <li>Actors names are case sensitive. For instance "Brad Pitt", "Tom Hardy", etc</li>
+    <li>The Get response returns a list for multiple movies.</li>
+</ul>
+
+
+
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Authentication</h1>
+<p>Python example of Authentication:</p>
+<pre id="codey"><code>import requests
+
+api_key = "XXXXXXXXXXXXXXXXXX"
+
+url = 'http://127.0.0.1:5000/authenticate'
+my_obj = {'api_key': f'{api_key}'}
+
+request = requests.post(url, json=my_obj)
+
+# Below is used to create the header for future requests
+access_token = request.json()
+access_token = access_token['access_token']
+headers = {
+    "Authorization": f"Bearer {access_token}"
+}
+</code></pre>
+
+<p>
+Note: Account is required for an API Key <br>
+Note: the API Key can be found by navigating to "Get API Key" tab as shown below.
+</p>
+<img src="{{url_for('static', filename='api_key.png')}}" />
+
+
+{% endblock %}
